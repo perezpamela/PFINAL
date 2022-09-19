@@ -1,4 +1,16 @@
 {% extends 'base.html' %}
 
-{% block title %} Titulo default {% endblock title %} 
-{% block main %} Bloque main default. Apunte. {% endblock main %} 
+{% block title %} {{apunte.titulo}} {% endblock title %} 
+{% block main %} 
+
+
+<p>{{apunte.id}}</p>
+<p>{{apunte.titulo}}</p>
+<p>{{apunte.contenido}}</p>
+<p>{{apunte.created_date}}</p>
+<p>{{apunte.last_updated_date}}</p>
+
+
+
+
+{% endblock main %} 

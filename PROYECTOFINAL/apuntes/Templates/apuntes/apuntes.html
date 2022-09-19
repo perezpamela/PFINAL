@@ -1,4 +1,14 @@
 {% extends 'base.html' %}
 
 {% block title %} Titulo default {% endblock title %} 
-{% block main %} Bloque main default. Apuntes. {% endblock main %} 
+{% block main %} Bloque main default. Apuntes. 
+{% for a in apuntes %}
+<p>{{a.id}}</p>
+<p>{{a.titulo}}</p>
+<p>{{a.contenido}}</p>
+<p>{{a.created_date}}</p>
+<p>{{a.last_updated_date}}</p>
+{% empty %}
+<p class="alert alert-info">No hay apuntes cargados.</p>
+{% endfor %}
+{% endblock main %} 
