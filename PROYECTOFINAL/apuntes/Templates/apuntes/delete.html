@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %} Titulo default {% endblock title %} 
+{% block main %} Bloque main default. Apuntes. 
+<form method="POST">
+    {% csrf_token %} 
+    <p>¿Está seguro de que quiere borrar {{obj}}?</p>
+    <p ><a class='btn btn-outlined-secondary' href="{{request.META.HTTP_REFERER}}">Cancelar</a> <input class="btn btn-primary" type="submit" name="Submit" value="Confirmar">
+</form>
+
+{% endblock main %} 

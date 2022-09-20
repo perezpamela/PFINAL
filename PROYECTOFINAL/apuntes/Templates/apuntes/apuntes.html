@@ -3,12 +3,21 @@
 {% block title %} Titulo default {% endblock title %} 
 {% block main %} Bloque main default. Apuntes. 
 {% for a in apuntes %}
-<p>{{a.id}}</p>
-<p>{{a.titulo}}</p>
-<p>{{a.contenido}}</p>
-<p>{{a.created_date}}</p>
-<p>{{a.last_updated_date}}</p>
+
+<section class="d-flex justify-content-center">
+<div class="w-50">
+<div class="card text-center m-2" >
+    <img src="{{a.portada}}" class="card-img-top">
+    <div class="card-body">
+      <h5 class="card-title">{{a.titulo}}</h5>
+      <p class="card-text">{{a.contenido|truncatechars:50}}</p>
+      <a href="{% url 'apunte' a.id %}" class="btn btn-primary">Ver más.</a>
+    </div>
+</div>
+</div>
+</section>
 {% empty %}
-<p class="alert alert-info">No hay apuntes cargados.</p>
+<p class="alert alert-info">No hay apuntes cargados. <br> <a class="btn btn-outline-primary" href="{% url 'create-apunte'%}"> Cargar un apunte.</a></p>
 {% endfor %}
+
 {% endblock main %} 

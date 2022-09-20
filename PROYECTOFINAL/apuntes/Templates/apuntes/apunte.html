@@ -2,13 +2,24 @@
 
 {% block title %} {{apunte.titulo}} {% endblock title %} 
 {% block main %} 
+<section class="d-flex justify-content-end">
+    <div class="w-25">
+        <p><a href="{% url 'update-apunte' apunte.id %}"><i class="bi bi-pencil-square"></i></a><a href="{% url 'delete-apunte' apunte.id %}"><i class="bi bi-trash"></i></a></p>
+    </div>
+</section>
+<section class="d-flex justify-content-center">
+    <div class='w-50'>
+        
+        <p><h1>{{apunte.titulo}}</h1></p>
+        <p>{{apunte.contenido}}</p>
+        <p class="text-muted">Autor: @{{apunte.creador.username}}</p>
+        <p class="text-muted">Creado: {{apunte.created_date}}</p>
+        <p class="text-muted">Última Actualización: {{apunte.last_updated_date}}</p>
+        <p ><a class='btn btn-primary' href="{{request.META.HTTP_REFERER}}"><i class="bi bi-arrow-left"></i><span class="px-1">Volver</span></a></p>
+    </div>
+</section>
 
 
-<p>{{apunte.id}}</p>
-<p>{{apunte.titulo}}</p>
-<p>{{apunte.contenido}}</p>
-<p>{{apunte.created_date}}</p>
-<p>{{apunte.last_updated_date}}</p>
 
 
 
