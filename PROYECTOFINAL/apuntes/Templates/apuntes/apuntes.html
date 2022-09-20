@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %} Titulo default {% endblock title %} 
+{% block title %} Apuntes {% endblock title %} 
 {% block main %} Bloque main default. Apuntes. 
 {% for a in apuntes %}
 
 <section class="d-flex justify-content-center">
 <div class="w-50">
 <div class="card text-center m-2" >
-    <img src="{{a.portada}}" class="card-img-top">
+    <img src="{{a.portada}}" class="card-img-top" style="width: 100%; height: 20rem;">
     <div class="card-body">
       <h5 class="card-title">{{a.titulo}}</h5>
       <p class="card-text">{{a.contenido|truncatechars:50}}</p>
