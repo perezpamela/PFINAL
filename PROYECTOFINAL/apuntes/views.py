@@ -1,11 +1,18 @@
+from email.headerregistry import ContentDispositionHeader
+from http.client import HTTPResponse
 from django.shortcuts import render, HttpResponse, redirect
 from .models import Apunte, Categoria, Mensaje, Like
 from .forms import ApunteForm
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 
 # Create your views here.
 def getApuntes(request):
-    apuntes = Apunte.objects.all()
-    context = {'apuntes':apuntes}
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    apuntes = Apunte.objects.filter(titulo__icontains=q) #icontains titulo__istartswith
+    apuntes_count = apuntes.count() #El total para mostrar cuántos resultados se encontraron
+    context = {'apuntes': apuntes, 'apuntes_count': apuntes_count}
     return render(request, 'apuntes/apuntes.html', context)
 
 def getApunte(request, pk):
@@ -28,7 +35,15 @@ def CreateApunte(request):
     if request.method == 'POST':
         form = ApunteForm(request.POST)
         if form.is_valid():
-            form.save()
+            
+            a = Apunte(
+            titulo = form.cleaned_data['titulo'], 
+            contenido = form.cleaned_data['contenido'],
+            portada = form.cleaned_data['portada'],
+            creador = User.objects.get(pk=request.user.id)
+            )
+            a.save()
+ 
             return redirect('/')
     context = {'form': form}
     return render(request,'apuntes/apunteForm.html', context)
@@ -49,6 +64,12 @@ def DeleteApunte(request, pk):
     apunte = Apunte.objects.get(id=pk)
     if request.method == 'POST':
         apunte.delete()
-        apunte.save()
         return redirect('/')
     return render(request, 'apuntes/delete.html', {'obj':apunte})
+
+
+        
+
+
+
+    

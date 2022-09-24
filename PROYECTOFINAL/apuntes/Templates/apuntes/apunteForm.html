@@ -1,12 +1,20 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
 
 {% block title %} {{apunte.titulo}} {% endblock title %} 
+{% block head %} 
+{{ form.media.js }}
+{{ form.media.css }}
+{% endblock head %}
 {% block main %} 
-<div>
-<form method="POST">
+<div class="d-flex justify-content-center">
+<form method="POST" class="w-50">
     {% csrf_token %}
-    {{form.as_p}}
-    <input type="Submit" value="Guardar">
+
+    {{form|crispy}}
+
+    <span><a class='btn btn-outline-secondary m-1' href="{{request.META.HTTP_REFERER}}">Cancelar</a><input class="btn btn-primary" type="Submit" value="Guardar"></span> 
 </form>
 </div>
 

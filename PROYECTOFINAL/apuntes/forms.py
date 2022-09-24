@@ -4,4 +4,5 @@ from .models import Apunte
 class ApunteForm(ModelForm):
     class Meta:
         model = Apunte
-        fields = ['titulo', 'contenido', 'portada']
+        fields = ['titulo', 'contenido', 'portada', 'creador']
+        exclude = ["creador"]

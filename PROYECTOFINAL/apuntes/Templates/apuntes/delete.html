@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %} Titulo default {% endblock title %} 
-{% block main %} Bloque main default. Apuntes. 
-<form method="POST">
+{% block title %} Delete {{obj.titulo}} {% endblock title %} 
+{% block main %} 
+<div class="d-flex justify-content-center m-4">
+<form method="POST" class="w-50">
     {% csrf_token %} 
-    <p>¿Está seguro de que quiere borrar {{obj}}?</p>
-    <p ><a class='btn btn-outlined-secondary' href="{{request.META.HTTP_REFERER}}">Cancelar</a> <input class="btn btn-primary" type="submit" name="Submit" value="Confirmar">
+    <p>¿Está seguro de que quiere borrar <strong>{{obj.titulo}}</strong>?</p>
+    <p ><a class='btn btn-outline-secondary m-1' href="{{request.META.HTTP_REFERER}}">Cancelar</a> <input class="btn btn-primary" type="submit" name="Submit" value="Confirmar">
 </form>
-
+</div>
 {% endblock main %} 

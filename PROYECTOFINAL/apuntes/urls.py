@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path, include
 from . import views
 
 
@@ -10,4 +10,5 @@ urlpatterns = [
     path('apuntes/add/', views.CreateApunte, name='create-apunte'),
     path('apuntes/update/<int:pk>', views.UpdateApunte, name='update-apunte'),
     path('apuntes/delete/<int:pk>', views.DeleteApunte, name='delete-apunte')
+    
 ]

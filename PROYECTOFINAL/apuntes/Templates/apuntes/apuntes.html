@@ -1,23 +1,59 @@
 {% extends 'base.html' %}
 
 {% block title %} Apuntes {% endblock title %} 
-{% block main %} Bloque main default. Apuntes. 
-{% for a in apuntes %}
+{% block main %}
 
-<section class="d-flex justify-content-center">
-<div class="w-50">
+
+<div class="d-flex justify-content-center">
+  <div class="w-50">
+    <a class="btn btn-primary" href="{% url 'create-apunte' %}">Crear Apunte</a>
+  </div>
+  
+</div>
+
+{% for a in apuntes %}
+<section class="d-flex justify-content-center"> <!-- seccion cards-->
+
+  <div class="w-50">
+    
+    
+    {% if forloop.first %} 
+    <form class="d-flex m-3" role="search">
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+        </div>
+        <input class="form-control me-2" type="text" placeholder="Buscar" name="q">
+      </div>
+      
+    </form>
+    <p class="text-muted">Apuntes encontrados: {{apuntes_count}}.</p>
+    {% endif %}
 <div class="card text-center m-2" >
     <img src="{{a.portada}}" class="card-img-top" style="width: 100%; height: 20rem;">
     <div class="card-body">
       <h5 class="card-title">{{a.titulo}}</h5>
+      {% autoescape off %}
       <p class="card-text">{{a.contenido|truncatechars:50}}</p>
+      {% endautoescape off %}
       <a href="{% url 'apunte' a.id %}" class="btn btn-primary">Ver más.</a>
+    </div>
+    <div class="card-footer">
+      Creado por {{a.creador.username}}. {{a.created_date}}
     </div>
 </div>
 </div>
 </section>
 {% empty %}
-<p class="alert alert-info">No hay apuntes cargados. <br> <a class="btn btn-outline-primary" href="{% url 'create-apunte'%}"> Cargar un apunte.</a></p>
+<section class="d-flex justify-content-center my-3">
+  <div class="w-50">  <p class="alert alert-info">No hay apuntes cargados. </p>
+  </div>
+
+</section>
 {% endfor %}
+
+  
+
 
 {% endblock main %} 
